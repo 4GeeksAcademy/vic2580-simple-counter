@@ -9,18 +9,25 @@ const Home = () => {
 	const [seconds, setSeconds] = useState(0);
 
 	useEffect(() => {
-        const timeout = setTimeout(() => {
+        const interval = setInterval(() => {
             setSeconds(prev => prev + 1);
         }, 1000);
-        return () => clearTimeout(timeout);
-    }, [seconds]);
 
+        return () => clearInterval(interval);
+    }, []); 
 
-	return (
-            <div>
-                <SecondsCounter seconds={seconds} />
-            </div>
-	);
+    const resetTimer = () => {
+        setSeconds(0);
+    };
+
+    return (
+        <div>
+            <SecondsCounter seconds={seconds} />
+            <button onClick={resetTimer} className="reset-button">
+                Reset Timer
+            </button>
+        </div>
+    );
 };
 
 export default Home;
